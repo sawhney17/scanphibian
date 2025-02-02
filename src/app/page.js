@@ -47,7 +47,8 @@ export default function ScanphibianLanding() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          Leap into a new era of patient information and safety. Powered by AR and AI.
+          Leap into a new era of patient information and safety. Powered by 
+          <span className='text-blue-800 font-semibold'>AR and AI</span>.
         </motion.p>
 
         <motion.button
