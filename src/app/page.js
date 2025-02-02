@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 
-const PLACEHOLDER_IMAGE_URL = '';
+const PLACEHOLDER_IMAGE_URL = '/something.png';
 
 const FEATURES = [
   {
@@ -122,8 +123,10 @@ export default function ScanphibianLanding() {
             transition={{ duration: 0.8 }}
           >
             <div className="relative w-full max-w-screen-md shadow-md overflow-hidden rounded-lg">
-              <img
+              <Image
                 src={PLACEHOLDER_IMAGE_URL}
+                width={800}
+                height={600}
                 alt="Scanphibian Screenshot"
                 className="object-cover w-full h-auto"
               />
