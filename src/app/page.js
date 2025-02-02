@@ -49,7 +49,7 @@ export default function ScanphibianLanding() {
         >
           Leap into a new era of patient information and safety. Powered by AR and AI.
         </motion.p>
-
+         
         <motion.button
           className="px-8 py-3 text-white bg-blue-700 rounded-full shadow-lg hover:bg-blue-800"
           whileHover={{ scale: 1.05 }}
