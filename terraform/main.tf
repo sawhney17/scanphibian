@@ -1,3 +1,17 @@
+terraform {
+  required_providers {
+    vercel = {
+      source  = "vercel/vercel"
+      version = "~> 0.7.0"
+    }
+  }
+}
+
+provider "vercel" {
+  api_token = var.vercel_api_token
+}
+
+# ✅ Define the main Vercel project
 resource "vercel_project" "scanphibian" {
   name      = "scanphibian"
   framework = "nextjs"
@@ -7,24 +21,24 @@ resource "vercel_project" "scanphibian" {
   }
 }
 
-# Define a separate branch for the experiment
-resource "vercel_deployment" "experiment_branch" {
-  project_id   = vercel_project.scanphibian.id
-  git_branch   = "experiment"
-  alias        = "experiment.scanphibian.vercel.app"
+# ✅ Create a second project for the experiment version
+resource "vercel_project" "scanphibian_experiment" {
+  name      = "scanphibian-experiment"
+  framework = "nextjs"
+  git_repository = {
+    type = "github"
+    repo = "sawhney17/scanphibian"
+  }
 }
 
-# Traffic Splitting (50% Main, 50% Experiment)
-resource "vercel_project_traffic_splitting" "split_test" {
+# ✅ Define a custom domain for the main version
+resource "vercel_project_domain" "main_domain" {
   project_id = vercel_project.scanphibian.id
+  domain     = "scanphibian.vercel.app"
+}
 
-  rules {
-    target = "main"
-    weight = 50
-  }
-
-  rules {
-    target = "experiment"
-    weight = 50
-  }
+# ✅ Define a custom domain for the experiment version
+resource "vercel_project_domain" "experiment_domain" {
+  project_id = vercel_project.scanphibian_experiment.id
+  domain     = "scanphibian-experiment.vercel.app"
 }
